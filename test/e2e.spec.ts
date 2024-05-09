@@ -7,7 +7,7 @@ import {
   testConfig,
 } from '@vendure/testing';
 import { TestServer } from '@vendure/testing/lib/test-server';
-import { KonnectPlugin } from '../src/konnect.plugin';
+import { KonnectPlugin } from '../src';
 import { initialData } from './initial-data';
 import path from 'path';
 

@@ -1,0 +1,1 @@
+export * from './konnect.plugin';
