@@ -1,4 +1,5 @@
-# Vendure plugin konnect
+
+# WIP: Vendure plugin konnect
 
 Add how to use this plugin
 
