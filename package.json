@@ -1,6 +1,6 @@
 {
   "name": "vendure-plugin-konnect",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Vendure - Konnect payment plugin",
   "author": "Mustapha Turki",
   "repository": "https://github.com/stoufa88/vendure-plugin-konnect",
