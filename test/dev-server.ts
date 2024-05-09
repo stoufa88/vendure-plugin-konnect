@@ -13,7 +13,7 @@ import {
 import { AdminUiPlugin } from '@vendure/admin-ui-plugin';
 import { AssetServerPlugin } from '@vendure/asset-server-plugin';
 import path from 'path';
-import { ExamplePlugin } from '../src';
+import { KonnectPlugin } from '../src/konnect.plugin';
 import { initialData } from './initial-data';
 
 require('dotenv').config();
@@ -27,7 +27,7 @@ require('dotenv').config();
         assetUploadDir: path.join(__dirname, '__data__/assets'),
         route: 'assets',
     }),
-      ExamplePlugin.init({
+      KonnectPlugin.init({
         enabled: true,
       }),
       DefaultSearchPlugin,

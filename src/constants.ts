@@ -1,2 +1,2 @@
-export const loggerCtx = 'ExamplePlugin';
-export const PLUGIN_INIT_OPTIONS = Symbol('PLUGIN_INIT_OPTIONS');
+export const loggerCtx = 'KonnectPlugin';
+export const KONNECT_PLUGIN_OPTIONS = Symbol('KONNECT_PLUGIN_OPTIONS');

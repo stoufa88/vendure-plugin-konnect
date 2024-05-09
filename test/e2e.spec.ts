@@ -7,11 +7,11 @@ import {
   testConfig,
 } from '@vendure/testing';
 import { TestServer } from '@vendure/testing/lib/test-server';
-import { ExamplePlugin } from '../src/example.plugin';
+import { KonnectPlugin } from '../src/konnect.plugin';
 import { initialData } from './initial-data';
 import path from 'path';
 
-describe('Example plugin e2e', function () {
+describe('Konnect payment plugin e2e', function () {
   let server: TestServer;
   let adminClient: SimpleGraphQLClient;
   let shopClient: SimpleGraphQLClient;
@@ -22,7 +22,7 @@ describe('Example plugin e2e', function () {
     const config = mergeConfig(testConfig, {
       logger: new DefaultLogger({ level: LogLevel.Debug }),
       plugins: [
-        ExamplePlugin.init({
+        KonnectPlugin.init({
           enabled: true,
         }),
       ],
