@@ -2,7 +2,7 @@
 import { HttpService } from '@nestjs/axios';
 import { Controller, Post, Get, Query, Req, Res, HttpStatus } from '@nestjs/common';
 import { Ctx, InternalServerError, LanguageCode, Logger, Order, OrderService, PaymentMethod, PaymentMethodService, RequestContext, RequestContextService, TransactionalConnection } from '@vendure/core';
-import { catchError, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import type { Response } from 'express';
 import { loggerCtx } from './constants';
 import { RequestWithRawBody } from './types';

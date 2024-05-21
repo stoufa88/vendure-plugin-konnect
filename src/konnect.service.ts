@@ -50,7 +50,7 @@ export class KonnectService {
         "phoneNumber": order.customer?.emailAddress,
         "email": order.customer?.emailAddress,
         "orderId": order.id,
-        "webhook": "https://merchant.tech/api/notification_payment",
+        "webhook": "http://51.210.243.161:3000/konnect",
         "silentWebhook": true,
         "successUrl": "https://dev.konnect.network/gateway/payment-success",
         "failUrl": "https://dev.konnect.network/gateway/payment-failure",
