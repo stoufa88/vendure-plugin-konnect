@@ -36,7 +36,7 @@ export class KonnectController {
 
     // @TODO get channelToken Add withTransaction like in stripe plugin
     
-    const outerCtx = await this.createContext('channelToken', request);
+    const outerCtx = await this.createContext('16umpfivrsek47brjwj', request);
     await this.connection.withTransaction(outerCtx, async ctx => {
       const order = await this.orderService.findOneByCode(ctx, data.orderId);
 
@@ -62,12 +62,7 @@ export class KonnectController {
       }
   
       const paymentMethod = await this.getPaymentMethod(ctx);
-  
-      // this.orderService.addPaymentToOrder(ctx, query.payment_ref, {
-      //   metadata: {},
-      //   method: 'my-payment-method'
-      // });
-  
+
       const addPaymentToOrderResult = await this.orderService.addPaymentToOrder(ctx, data.orderId, {
         method: paymentMethod.code,
         metadata: {
@@ -90,8 +85,6 @@ export class KonnectController {
         loggerCtx,
       );
     })
-
-    
 
     // Send the response status only if we didn't sent anything yet.
     if (!response.headersSent) {
