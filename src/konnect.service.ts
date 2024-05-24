@@ -37,8 +37,8 @@ export class KonnectService {
     const { data } = await firstValueFrom(
       this.httpService.post(`${this.options.baseUrl}/payments/init-payment`, {
         "receiverWalletId": konnect.receiverWalletId,
-        "token": order.currencyCode,
-        "amount": order.totalWithTax * 10, // convert to millimes
+        "token": "TND",
+        "amount": 1000,
         "type": "immediate",
         "acceptedPaymentMethods": [
           "bank_card"
