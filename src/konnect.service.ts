@@ -38,7 +38,7 @@ export class KonnectService {
       this.httpService.post(`${this.options.baseUrl}/payments/init-payment`, {
         "receiverWalletId": konnect.receiverWalletId,
         "token": order.currencyCode,
-        "amount": order.totalWithTax,
+        "amount": order.totalWithTax * 10, // convert to millimes
         "type": "immediate",
         "acceptedPaymentMethods": [
           "bank_card"
@@ -52,8 +52,8 @@ export class KonnectService {
         "orderId": order.id,
         "webhook": "https://shedcript.tn/payments/konnect",
         "silentWebhook": true,
-        "successUrl": "https://dev.konnect.network/gateway/payment-success",
-        "failUrl": "https://dev.konnect.network/gateway/payment-failure",
+        "successUrl": "https://gateway.sandbox.konnect.network/payment-success",
+        "failUrl": "https://gateway.sandbox.konnect.network/payment-failure",
         "theme": "light"
       }, {
         headers: {
