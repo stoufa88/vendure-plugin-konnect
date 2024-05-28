@@ -38,42 +38,45 @@ export class KonnectController {
     
     const outerCtx = await this.createContext('16umpfivrsek47brjwj', request);
     await this.connection.withTransaction(outerCtx, async ctx => {
-      const order = await this.orderService.findOneByCode(ctx, data.orderId);
+      const { id, status, orderId, amount } = data.payment;
+
+      const order = await this.orderService.findOneByCode(ctx, orderId);
 
       if (!order) {
         throw new Error(
-          `Unable to find order ${data.orderId}, unable to settle payment!`,
+          `Unable to find order ${orderId}, unable to settle payment!`,
         );
       }
+
   
       Logger.info(JSON.stringify(order));
       Logger.info('-------');
       Logger.info(JSON.stringify(data));
   
-      if (data.status === 'pending') {
-        Logger.warn(`Payment for order ${data.orderId} failed`, loggerCtx);
+      if (status === 'pending') {
+        Logger.warn(`Payment for order ${orderId} failed`, loggerCtx);
         response.send('Ok');
         return;
       }
   
-      if (data.status !== 'completed') {
-        Logger.info(`Received ${data.type} status update for order ${data.orderId}`, loggerCtx);
+      if (status !== 'completed') {
+        Logger.info(`Received ${status} status update for order ${orderId}`, loggerCtx);
         return;
       }
   
       const paymentMethod = await this.getPaymentMethod(ctx);
 
-      const addPaymentToOrderResult = await this.orderService.addPaymentToOrder(ctx, data.orderId, {
+      const addPaymentToOrderResult = await this.orderService.addPaymentToOrder(ctx, orderId, {
         method: paymentMethod.code,
         metadata: {
-          paymentId: data.id,
-          paymentAmountReceived: data.amount,
+          paymentId: id,
+          paymentAmountReceived: amount,
         },
       });
   
       if (!(addPaymentToOrderResult instanceof Order)) {
         Logger.error(
-          `Error adding payment to order ${data.orderId}: ${addPaymentToOrderResult.message}`,
+          `Error adding payment to order ${orderId}: ${addPaymentToOrderResult.message}`,
           loggerCtx,
         );
         return;
@@ -81,7 +84,7 @@ export class KonnectController {
   
       // The payment intent ID is added to the order only if we can reach this point.
       Logger.info(
-        `Payment id ${data.id} added to order ${data.orderId}`,
+        `Payment id ${id} added to order ${orderId}`,
         loggerCtx,
       );
     })
