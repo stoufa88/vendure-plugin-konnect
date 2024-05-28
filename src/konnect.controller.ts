@@ -26,7 +26,10 @@ export class KonnectController {
     @Req() request: RequestWithRawBody,
     @Res() response: Response,
   ): Promise<void> {
-    // Fetch payment using payment_ref
+    Logger.info('hello from webhook', loggerCtx);
+    Logger.info(query.payment_ref, loggerCtx);
+
+    // Fetch payment usng payment_ref
     const { data } = await firstValueFrom(
       this.httpService.get(`${BASE_KONNECT_URL}/payments/${query.payment_ref}`)
     );
@@ -44,6 +47,8 @@ export class KonnectController {
       }
   
       Logger.info(JSON.stringify(order));
+      Logger.info('-------');
+      Logger.info(JSON.stringify(data));
   
       if (data.status === 'pending') {
         Logger.warn(`Payment for order ${data.orderId} failed`, loggerCtx);
@@ -52,7 +57,7 @@ export class KonnectController {
       }
   
       if (data.status !== 'completed') {
-        Logger.info(`Received ${data.status} status update for order ${data.orderId}`, loggerCtx);
+        Logger.info(`Received ${data.type} status update for order ${data.orderId}`, loggerCtx);
         return;
       }
   
