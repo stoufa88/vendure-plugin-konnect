@@ -31,7 +31,7 @@ export class KonnectController {
 
     // Fetch payment usng payment_ref
     const { data } = await firstValueFrom(
-      this.httpService.get(`${BASE_KONNECT_URL}/${query.payment_ref}`)
+      this.httpService.get(`${BASE_KONNECT_URL}/payments/${query.payment_ref}`)
     );
 
     // @TODO get channelToken Add withTransaction like in stripe plugin

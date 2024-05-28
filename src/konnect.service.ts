@@ -37,8 +37,8 @@ export class KonnectService {
     const { data } = await firstValueFrom(
       this.httpService.post(`${this.options.baseUrl}/payments/init-payment`, {
         "receiverWalletId": konnect.receiverWalletId,
-        "token": "TND",
-        "amount": 1000,
+        "token": order.currencyCode,
+        "amount": order.totalWithTax * 10, // convert to millimes
         "type": "immediate",
         "acceptedPaymentMethods": [
           "bank_card"
@@ -52,8 +52,8 @@ export class KonnectService {
         "orderId": order.id,
         "webhook": "https://shedcript.tn/payments/konnect",
         "silentWebhook": true,
-        "successUrl": "https://gateway.sandbox.konnect.network/payment-success",
-        "failUrl": "https://gateway.sandbox.konnect.network/payment-failure",
+        "successUrl": `https://vendure-shop-omega.vercel.app/checkout/success/${order.id}`,
+        "failUrl": "https://vendure-shop-omega.vercel.app/checkout/failure",
         "theme": "light"
       }, {
         headers: {
