@@ -21,7 +21,8 @@
   "scripts": {
     "start": "yarn ts-node test/dev-server.ts",
     "build": "rimraf dist && tsc",
-    "test": "jest --preset=\"ts-jest\""
+    "test": "jest --preset=\"ts-jest\"",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@nestjs/axios": "^3.0.2",
