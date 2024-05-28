@@ -26,10 +26,7 @@ export class KonnectController {
     @Req() request: RequestWithRawBody,
     @Res() response: Response,
   ): Promise<void> {
-    Logger.info('hello from webhook', loggerCtx);
-    Logger.info(query.payment_ref, loggerCtx);
-
-    // Fetch payment usng payment_ref
+    // Fetch payment using payment_ref
     const { data } = await firstValueFrom(
       this.httpService.get(`${BASE_KONNECT_URL}/payments/${query.payment_ref}`)
     );
@@ -54,10 +51,8 @@ export class KonnectController {
         return;
       }
   
-      if (data.type !== 'completed') {
-        // This should never happen as the webhook is configured to receive
-        // payment_intent.succeeded and payment_intent.payment_failed events only
-        Logger.info(`Received ${data.type} status update for order ${data.orderId}`, loggerCtx);
+      if (data.status !== 'completed') {
+        Logger.info(`Received ${data.status} status update for order ${data.orderId}`, loggerCtx);
         return;
       }
   
